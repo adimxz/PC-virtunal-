@@ -56,17 +56,17 @@ jobs:
         Remove-Item $installerPath -Force
         Write-Host "Tailscale installed successfully!" -ForegroundColor Green
         
-    - - name: Start Tailscale
-        run: |
-          Write-Host "Starting Tailscale..." -ForegroundColor Green
-          & "C:\Program Files\Tailscale\tailscale.exe" up --hostname "enigmano-${{ github.run_id }}" --authkey ${{ secrets.TAILSCALE_AUTH_KEY }}
-          Start-Sleep -Seconds 15
-        
+    - -- name: Start Tailscale
+         run: |
+           Write-Host "Starting Tailscale..." -ForegroundColor Green
+           & "C:\Program Files\Tailscale\tailscale.exe" up --hostname "enigmano-${{ github.run_id }}" --authkey ${{ secrets.TAILSCALE_AUTH_KEY }}
+           Start-Sleep -Seconds 15
+
     - name: Get Tailscale IP
-      run: |
-        $tsIP = & "C:\Program Files\Tailscale\tailscale.exe" ip -4
-        Write-Host "Tailscale IP: $tsIP" -ForegroundColor Green
-        echo "TAILSCALE_IP=$tsIP" >> $env:GITHUB_ENV
+     run: |
+       $tsIP = & "C:\Program Files\Tailscale\tailscale.exe" ip -4
+       Write-Host "Tailscale IP: $tsIP" -ForegroundColor Green
+       echo "TAILSCALE_IP=$tsIP" >> $env:GITHUB_ENV
         
     - name: Install Google Chrome (Direct)
       run: |
